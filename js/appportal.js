@@ -16,22 +16,15 @@ if (usuarioEncontrado) {
   saldoActual = usuarioEncontrado.saldo;
 }
 
-//Event Listeners//
+function actualizarSaldoDisplay() {
+  let displaySaldo = document.getElementById("saldoCuenta");
+  displaySaldo.textContent = 'Saldo: ' + saldoActual + ' Pesos';
+}
 
-saldoBtn.addEventListener("click", saldo);
 retirarBtn.addEventListener("click", retirar);
 depositarBtn.addEventListener("click", depositar);
 
 //Funciones//
-
-function saldo() {
-  Swal.fire({
-    text: "Saldo Actual:  " + saldoActual + " Pesos",
-    icon: "info",
-    showConfirmButton: true,
-    confirmButtonColor: "#6cace4",
-  });
-}
 
 function depositar() {
   Swal.fire({
@@ -67,6 +60,7 @@ function depositar() {
         });
       } else {
         saldoActual += monto;
+        actualizarSaldoDisplay();
         Swal.fire({
           title: "Depósito exitoso",
           html:
@@ -128,6 +122,7 @@ function retirar() {
         });
       } else {
         saldoActual -= monto;
+        actualizarSaldoDisplay();
         Swal.fire({
           title: "Retiro exitoso",
           html:
@@ -146,10 +141,13 @@ function retirar() {
   });
 }
 
-//Modificacion al text content de bienvenida
+//Modificacion al text content de bienvenida y del saldo
 
 let bienvenidoUsuario = document.getElementById("bienvenidoUsuario");
 const primeraLetraMayuscula = usuarioGuardado.charAt(0).toUpperCase();
 const restoNombreMinusculas = usuarioGuardado.slice(1).toLowerCase();
 bienvenidoUsuario.textContent =
   "Bienvenido " + primeraLetraMayuscula + restoNombreMinusculas;
+
+let displaySaldo = document.getElementById("saldoCuenta");
+displaySaldo.textContent = 'Saldo: ' + saldoActual + ' Pesos';
